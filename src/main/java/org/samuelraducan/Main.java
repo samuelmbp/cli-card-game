@@ -6,5 +6,9 @@ public class Main {
 
         Card card = new Card("a", "a", 1);
         System.out.println(card);
+
+        Deck deck = new Deck();
+        System.out.println(deck.getDeckOfCards());
+
     }
 }
