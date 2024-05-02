@@ -1,6 +1,6 @@
 # CLI Card Game
 
 
-### Project Collaborators
+### Project Contributors
 - Samuel Raducan
 - Sanjida Begum
