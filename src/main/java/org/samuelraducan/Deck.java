@@ -1,14 +1,12 @@
 package org.samuelraducan;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Deck {
     private final List<Card> deckOfCards;
-
-    public List<Card> getDeckOfCards() {
-        return deckOfCards;
-    }
 
     public Deck() {
         this.deckOfCards = new ArrayList<>();
@@ -22,6 +20,14 @@ public class Deck {
         }
 
         return deckOfCards.remove(0);
+    }
+
+    public void sortDeck() {
+        Collections.sort(deckOfCards);
+    }
+
+    public List<Card> getDeckOfCards() {
+        return deckOfCards;
     }
 
     private void populateDeckCards() {

@@ -7,12 +7,13 @@ public class Main {
         Deck deck = new Deck();
         System.out.println(deck.getDeckOfCards().stream().count());
 
-//        for(Card card : deck.getDeckOfCards()) {
-//            System.out.println(card);
-//        }
-
         Card firstCard = deck.dealCard();
         System.out.println(firstCard);
 
+        deck.sortDeck();
+
+        for(Card card : deck.getDeckOfCards()) {
+            System.out.println(card);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package org.samuelraducan;
 
-public class Card {
+public class Card implements Comparable<Card> {
 
     private final String suit;
     private final String symbol;
@@ -32,5 +32,10 @@ public class Card {
                 ", symbol='" + symbol + '\'' +
                 ", value=" + value +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Card other) {
+        return Integer.compare(this.value, other.value);
     }
 }
