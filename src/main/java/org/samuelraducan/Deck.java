@@ -39,6 +39,12 @@ public class Deck {
         populateDeckCards();
     }
 
+    public void printDeck() {
+        for (Card card: deckOfCards) {
+            System.out.println(card);
+        }
+    }
+
     private void populateDeckCards() {
         String[] suits = {"u2764", "u2600", "u2666", "u2663" };
         String[] symbols = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
