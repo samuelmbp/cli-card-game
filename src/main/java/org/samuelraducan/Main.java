@@ -4,11 +4,15 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("CLI Card Game");
 
-        Card card = new Card("a", "a", 1);
-        System.out.println(card);
-
         Deck deck = new Deck();
-        System.out.println(deck.getDeckOfCards());
+        System.out.println(deck.getDeckOfCards().stream().count());
+
+//        for(Card card : deck.getDeckOfCards()) {
+//            System.out.println(card);
+//        }
+
+        Card firstCard = deck.dealCard();
+        System.out.println(firstCard);
 
     }
 }
