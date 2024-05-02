@@ -34,7 +34,7 @@ public class Main {
 //        sanjida.getCardCount();
 
         Card test = sanjida.getCard(4);
-        System.out.println(test);
+//        System.out.println(test);
 
         sanjida.getCardCount();
         System.out.println(sanjida.getScore());

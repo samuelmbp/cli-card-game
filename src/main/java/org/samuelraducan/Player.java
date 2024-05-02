@@ -14,6 +14,10 @@ public class Player {
         this.score = 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void drawCard(Card card) {
         playersCards.add(card);
     }
