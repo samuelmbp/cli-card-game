@@ -15,11 +15,13 @@ public class Main {
 //        deck.sortDeck();
 
 
-        deck.sortDeck(Comparator.comparing(Card::getSuit));
+//        deck.sortDeck(Comparator.comparing(Card::getSuit));
+
+        deck.shuffleDeck();
+
 
         for(Card card : deck.getDeckOfCards()) {
             System.out.println(card);
         }
-
     }
 }
