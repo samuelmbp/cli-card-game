@@ -26,8 +26,8 @@ public class Deck {
         Collections.sort(deckOfCards);
     }
 
-    public List<Card> getDeckOfCards() {
-        return deckOfCards;
+    public void sortDeck(Comparator<Card> comparator) {
+        Collections.sort(deckOfCards, comparator);
     }
 
     private void populateDeckCards() {
@@ -41,5 +41,8 @@ public class Deck {
                 deckOfCards.add(card);
             }
         }
+    }
+    public List<Card> getDeckOfCards() {
+        return deckOfCards;
     }
 }
