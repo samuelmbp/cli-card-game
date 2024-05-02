@@ -19,8 +19,18 @@ public class Main {
 
         deck.shuffleDeck();
 
+        deck.dealCard();
+        deck.dealCard();
+        deck.dealCard();
+        deck.dealCard();
 
-        for(Card card : deck.getDeckOfCards()) {
+        System.out.println(deck.getDeckOfCards().stream().count());
+
+        deck.resetDeck();
+
+        System.out.println(deck.getDeckOfCards().stream().count());
+
+                for(Card card : deck.getDeckOfCards()) {
             System.out.println(card);
         }
     }

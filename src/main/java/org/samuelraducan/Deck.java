@@ -34,6 +34,11 @@ public class Deck {
         Collections.shuffle(deckOfCards);
     }
 
+    public void resetDeck() {
+        deckOfCards.clear();
+        populateDeckCards();
+    }
+
     private void populateDeckCards() {
         String[] suits = {"u2764", "u2600", "u2666", "u2663" };
         String[] symbols = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
