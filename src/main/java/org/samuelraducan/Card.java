@@ -27,11 +27,22 @@ public class Card implements Comparable<Card> {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "suit='" + suit + '\'' +
-                ", symbol='" + symbol + '\'' +
-                ", value=" + value +
-                '}';
+        String suitSymbol = "";
+        switch (suit) {
+            case "u2764":
+                suitSymbol = "\u2665";
+                break;
+            case "u2600":
+                suitSymbol = "\u2666";
+                break;
+            case "u2666":
+                suitSymbol = "\u2663";
+                break;
+            case "u2663":
+                suitSymbol = "\u2660";
+                break;
+        }
+        return String.format("%-2s%s %-8s", symbol, suitSymbol, "(" + value + ")");
     }
 
     @Override

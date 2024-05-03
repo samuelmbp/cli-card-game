@@ -4,45 +4,31 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("CLI Card Game");
 
-        Deck deck = new Deck();
-        System.out.println(deck.getDeckOfCards().stream().count());
+        Player computer = new Player();
 
-        deck.shuffleDeck();
-
-        deck.dealCard();
-        deck.dealCard();
-        deck.dealCard();
-        deck.dealCard();
-
-        System.out.println(deck.getDeckOfCards().stream().count());
-
-//        deck.resetDeck();
-
-//        deck.printDeck();
-//        deck.resetDeck();
+        GameConsole gameConsole = new GameConsole();
+        String playerName = gameConsole.promptPlayerName();
+        Player player = new Player(playerName);
 
         Card card1 = new Card("diamond", "♦️", 2);
         Card card2 = new Card("diamond", "♦️", 3);
         Card card3 = new Card("diamond", "♦️", 4);
         Card card4 = new Card("diamond", "♦️", 5);
-        Player sanjida = new Player("Sanjida");
 
-        sanjida.drawCard(card1);
-        sanjida.drawCard(card2);
-        sanjida.drawCard(card3);
-        sanjida.drawCard(card4);
-//        sanjida.getCardCount();
+        player.drawCard(card1);
+        player.drawCard(card2);
+        player.drawCard(card3);
+        player.drawCard(card4);
 
-        Card test = sanjida.getCard(4);
-//        System.out.println(test);
+        Card card5 = new Card("diamond", "♠️", 6);
+        Card card6 = new Card("diamond", "♠️", 7);
+        Card card7 = new Card("diamond", "♠️", 8);
+        Card card8 = new Card("diamond", "♠️", 9);
+        computer.drawCard(card5);
+        computer.drawCard(card6);
+        computer.drawCard(card7);
+        computer.drawCard(card8);
 
-        sanjida.getCardCount();
-        System.out.println(sanjida.getScore());
-        sanjida.removeCard(card1);
-        sanjida.getCardCount();
-        sanjida.increaseScore(10);
-        System.out.println(sanjida.getScore());
-
-
+        gameConsole.displayGameState(player, computer);
     }
 }

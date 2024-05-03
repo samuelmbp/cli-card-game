@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private String name;
+    private final String name;
     private final List<Card> playersCards;
     private int score;
+
+    public Player() {
+        // Default name for computer
+        this("Computer");
+    }
 
     public Player(String name) {
         this.name = name;
@@ -49,7 +54,6 @@ public class Player {
     public void clearCards() {
         playersCards.clear();
     }
-
 
     public int getScore() {
         return score;
