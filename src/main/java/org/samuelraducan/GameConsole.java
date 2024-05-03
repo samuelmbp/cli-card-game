@@ -15,15 +15,16 @@ public class GameConsole {
         return scanner.nextLine();
     }
 
-    public void welcomeMessage (String name) {
+    public void welcomeMessage(String name) {
         System.out.println("Welcome to The CLI Card Game " + name + "!");
     }
 
     public void displayGameState (Player player, Player computer) {
         System.out.println("Player: " + player.getName());
         player.getCardCount();
-        System.out.println("Player's Score: " + player.getScore());
+        System.out.printf("%s's score:  %d",  player.getName(), player.getScore());
 
+        System.out.println();
         System.out.println("-----------------------------------");
 
         System.out.println("Computer");

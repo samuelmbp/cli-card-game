@@ -35,6 +35,8 @@ public class Player {
         for(Card card : playersCards) {
             System.out.println(card);
         }
+        System.out.println(playersCards.size());
+
     }
 
     public Card getCard(int position) {
