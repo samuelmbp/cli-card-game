@@ -19,6 +19,8 @@ public class Main {
         player.drawCard(card2);
         player.drawCard(card3);
         player.drawCard(card4);
+        player.increaseScore();
+        player.increaseScore();
 
         Card card5 = new Card("diamond", "♠️", 6);
         Card card6 = new Card("diamond", "♠️", 7);
@@ -28,6 +30,7 @@ public class Main {
         computer.drawCard(card6);
         computer.drawCard(card7);
         computer.drawCard(card8);
+        computer.increaseScore();
 
         gameConsole.displayGameState(player, computer);
     }

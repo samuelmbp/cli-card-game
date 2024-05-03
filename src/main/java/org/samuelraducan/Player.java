@@ -47,8 +47,9 @@ public class Player {
         return playersCards.get(position);
     }
 
-    public void increaseScore(int points) {
-        this.score += points;
+    public void increaseScore() {
+        int POINTS = 10;
+        this.score += POINTS;
     }
 
     public void clearCards() {
