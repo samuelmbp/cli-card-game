@@ -27,13 +27,14 @@ public class SnapGame extends Game {
 
     @Override
     public void play() {
-        this.printTitle();
+        SnapPics.asciiCardPicture();
+        console.welcomeMessage(this.getTitle(), player.getName());
         this.printRules();
 
         deck.shuffleDeck();
         dealInitialCards();
 
-        console.displayGameState(player, computer);
+//        console.displayGameState(player, computer);
     }
 
 

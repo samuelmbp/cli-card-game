@@ -21,4 +21,7 @@ public abstract class Game {
 
     public abstract boolean playAgain();
 
+    public String getTitle() {
+        return title;
+    }
 }

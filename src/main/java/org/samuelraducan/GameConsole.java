@@ -19,6 +19,13 @@ public class GameConsole {
         System.out.println("Welcome to The CLI Card Game " + name + "!");
     }
 
+    public void welcomeMessage(String gameTitle, String name) {
+        System.out.println();
+        System.out.printf("Welcome to %s CLI Card Game %s!", gameTitle, name);
+        System.out.println();
+        System.out.println();
+    }
+
     public void displayGameState (Player player, Player computer) {
         System.out.println("Player: " + player.getName());
         player.getCardCount();
@@ -31,4 +38,5 @@ public class GameConsole {
         computer.getCardCount();
         System.out.println("Computer's Score: " + computer.getScore());
     }
+
 }
