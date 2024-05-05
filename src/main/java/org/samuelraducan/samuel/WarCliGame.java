@@ -1,7 +1,6 @@
 package org.samuelraducan.samuel;
 
 import org.samuelraducan.*;
-
 import java.util.Scanner;
 
 public class WarCliGame extends Game {
@@ -59,7 +58,6 @@ public class WarCliGame extends Game {
             computer.removeCard(computerCard);
         }
 
-        scanner.close();
         console.displayGameState(player, computer);
 
         if (player.getScore() > computer.getScore()) {
@@ -69,16 +67,43 @@ public class WarCliGame extends Game {
         } else {
             System.out.println("It's a tie!");
         }
-    }
-    @Override
-    public boolean playAgain() {
-        return false;
+
+        playAgain();
+        scanner.close();
     }
 
+    @Override
+    public boolean playAgain() {
+        while (true) {
+            System.out.print("Would you like to play again? (yes/no): ");
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (!input.isEmpty()) {
+                if (input.equals("yes")) {
+                    resetGame();
+                    return true;
+                } else if (input.equals("no")) {
+                    System.out.println("Thank you for playing! Goodbye!");
+                    return false;
+                } else {
+                    System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+            }
+        }
+    }
+
+    private void resetGame() {
+        deck.resetDeck();
+        deck.shuffleDeck();
+        player.clearCards();
+        computer.clearCards();
+
+        System.out.println("Starting a new game...");
+    }
 
     private String promptPlayerName() {
         System.out.println("Please enter your name:");
         return scanner.nextLine();
-
     }
 }
