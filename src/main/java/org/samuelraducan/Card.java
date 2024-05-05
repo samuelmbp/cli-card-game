@@ -30,16 +30,16 @@ public class Card implements Comparable<Card> {
         String suitSymbol = "";
         switch (suit) {
             case "u2764":
-                suitSymbol = "\u2665";
+                suitSymbol = "♥";
                 break;
             case "u2600":
-                suitSymbol = "\u2666";
+                suitSymbol = "♦";
                 break;
             case "u2666":
-                suitSymbol = "\u2663";
+                suitSymbol = "♣";
                 break;
             case "u2663":
-                suitSymbol = "\u2660";
+                suitSymbol = "♠";
                 break;
         }
         return String.format("%-2s%s %-8s", symbol, suitSymbol, "(" + value + ")");
