@@ -1,7 +1,7 @@
 package org.samuelraducan.samuel;
 
 public class WarRules {
-    public static String displayRules() {
+    public static String getRules() {
         StringBuilder rules = new StringBuilder();
         rules.append("War Card Game Rules:\n");
         rules.append("1. Each player draws one card from the deck in each round.\n");

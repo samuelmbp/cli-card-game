@@ -5,7 +5,7 @@ import org.samuelraducan.samuel.WarRules;
 
 public class Main {
     public static void main(String[] args) {
-        WarCliGame warCliGame = new WarCliGame("War Card Game", WarRules.displayRules());
+        WarCliGame warCliGame = new WarCliGame("War Card Game", WarRules.getRules());
         warCliGame.play();
     }
 }

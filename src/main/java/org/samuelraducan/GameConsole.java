@@ -30,4 +30,16 @@ public class GameConsole {
         computer.getCardCount();
         System.out.println("Computer's Score: " + computer.getScore());
     }
+
+    public void displayGameState(Player player, Player computer, Card playerCard, Card computerCard) {
+        System.out.println("Player: " + player.getName());
+        System.out.println("Card: " + playerCard);
+        System.out.println("Score: " + player.getScore());
+
+        System.out.println("-----------------------------------");
+
+        System.out.println("Computer");
+        System.out.println("Card: " + computerCard);
+        System.out.println("Score: " + computer.getScore());
+    }
 }
