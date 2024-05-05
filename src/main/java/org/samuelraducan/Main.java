@@ -1,37 +1,47 @@
 package org.samuelraducan;
 
+import org.samuelraducan.sanjida.Rules;
+import org.samuelraducan.sanjida.War;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("CLI Card Game");
+//        System.out.println("CLI Card Game");
+//
+//        Player computer = new Player();
+//
+//        GameConsole gameConsole = new GameConsole();
+//        String playerName = gameConsole.promptPlayerName();
+//        Player player = new Player(playerName);
 
-        Player computer = new Player();
+        Rules rules = new Rules();
+        String gameRules = rules.getRules();
 
-        GameConsole gameConsole = new GameConsole();
-        String playerName = gameConsole.promptPlayerName();
-        Player player = new Player(playerName);
+        War warGame = new War("War", gameRules);
+        warGame.play();
 
-        Card card1 = new Card("diamond", "♦️", 2);
-        Card card2 = new Card("diamond", "♦️", 3);
-        Card card3 = new Card("diamond", "♦️", 4);
-        Card card4 = new Card("diamond", "♦️", 5);
 
-        player.drawCard(card1);
-        player.drawCard(card2);
-        player.drawCard(card3);
-        player.drawCard(card4);
-        player.increaseScore();
-        player.increaseScore();
+//        Card card1 = new Card("diamond", "♦️", 2);
+//        Card card2 = new Card("diamond", "♦️", 3);
+//        Card card3 = new Card("diamond", "♦️", 4);
+//        Card card4 = new Card("diamond", "♦️", 5);
+//
+//        player.drawCard(card1);
+//        player.drawCard(card2);
+//        player.drawCard(card3);
+//        player.drawCard(card4);
+//        player.increaseScore();
+//        player.increaseScore();
+//
+//        Card card5 = new Card("diamond", "♠️", 6);
+//        Card card6 = new Card("diamond", "♠️", 7);
+//        Card card7 = new Card("diamond", "♠️", 8);
+//        Card card8 = new Card("diamond", "♠️", 9);
+//        computer.drawCard(card5);
+//        computer.drawCard(card6);
+//        computer.drawCard(card7);
+//        computer.drawCard(card8);
+//        computer.increaseScore();
 
-        Card card5 = new Card("diamond", "♠️", 6);
-        Card card6 = new Card("diamond", "♠️", 7);
-        Card card7 = new Card("diamond", "♠️", 8);
-        Card card8 = new Card("diamond", "♠️", 9);
-        computer.drawCard(card5);
-        computer.drawCard(card6);
-        computer.drawCard(card7);
-        computer.drawCard(card8);
-        computer.increaseScore();
-
-        gameConsole.displayGameState(player, computer);
+//        gameConsole.displayGameState(player, computer);
     }
 }
