@@ -17,51 +17,67 @@ public class War extends Game {
         this.scanner = new Scanner(System.in);
         this.gameConsole = new GameConsole();  // initialises the game console
         this.deckOfCards = new Deck();
+        this.computer = new Player();
+        this.player = setUpPlayer();
+    }
+
+    private Player setUpPlayer() {
+//        gameConsole.promptPlayerName();   --> try refactor using this
+        System.out.println("Please enter your name");
+        String player1Name = scanner.nextLine();
+        System.out.println("Player 1: " + player1Name);
+        return new Player(player1Name);
     }
 
     public void startGame() {
-       String usersInput = scanner.nextLine();
-        if (usersInput.equals("1")) {
-        } else if (usersInput.equals("2")) {
-            printRules();
-            System.out.println();
+        while (true) {
             System.out.println("Please press 1 to play, or 2 to see the rules");
-            startGame();
-        } else {
-            System.out.println("Invalid input. Please press 1 or 2");
-            System.out.println();
-            System.out.println("Please press 1 to play, or 2 to see the rules");
-            startGame();
+            String usersInput = scanner.nextLine();
+            if (usersInput.equals("1")) {
+                break;
+            } else if (usersInput.equals("2")) {
+                printRules();
+                System.out.println();
+            } else {
+                System.out.println("Invalid input. Please press 1 or 2");
+                System.out.println();
+            }
         }
     }
 
+    // i want to create options for the user
 
-//    public void
-
-//    deck1.addAll(deckOfCards.sublist())
     @Override
     public void play() {
         gameConsole.welcomeMessage("War");
-        System.out.println("Please press 1 to play, or 2 to see the rules");
         startGame();
-
         deckOfCards.shuffleDeck();
+
+        UserCommands userCommands = new UserCommands(deckOfCards, player, computer, scanner);
+        userCommands.printOptions();
+
+
         LinkedList<Card>deck1 = new LinkedList<>();
         LinkedList<Card>deck2 = new LinkedList<>();
-        deck1.addAll(deckOfCards.getDeckOfCards().subList(0, 26));              //26 cards for p1
+        deck1.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
         deck2.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
-//        System.out.println(deck1);
-//        System.out.println(deck2);
-//        System.out.println(deck1.stream().distinct().count());
-//        System.out.println(deck2.stream().distinct().count());
 
-        Card player1Card = deck1.pop();
-        Card player2Card = deck2.pop();
-        System.out.println(player1Card.toString());
-        System.out.println(player2Card.toString());
-        System.out.println(deck2.stream().distinct().count());
-        // add override logic here
+
+        // linking player and comp card to
+        Card playersCard = deck1.pop();
+        Card computersCard = deck2.pop();
+        System.out.println( player.getName() + "'s card: " + playersCard.toString());
+        System.out.println("Computer's card: " + computersCard.toString());
+
+        if(playersCard.getValue() > computersCard.getValue()) {
+           this.player.increaseScore();  // whoever wins takes both set of cards
+        } else {
+            this.computer.increaseScore();
+        }
+        gameConsole.displayGameState(this.player, computer);
+//        System.out.println(deck1.stream().distinct().count());
     }
+
 
     @Override
     public boolean playAgain() {
