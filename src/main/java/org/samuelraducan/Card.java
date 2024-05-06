@@ -45,6 +45,7 @@ public class Card implements Comparable<Card> {
         return String.format("%-2s%s %-8s", symbol, suitSymbol, "(" + value + ")");
     }
 
+
     @Override
     public int compareTo(Card other) {
         return Integer.compare(this.value, other.value);

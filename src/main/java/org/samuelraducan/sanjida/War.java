@@ -21,12 +21,31 @@ public class War extends Game {
         this.player = setUpPlayer();
     }
 
+    public void displayPlayerCardAscii(Card card) {
+        String cardAscii = CardAscii.generateCardAscii(card);
+        System.out.println(cardAscii);
+    }
+
+    public void displayComputerCardAscii(Card card) {
+        String cardAscii = CardAscii.generateCardAscii(card);
+        System.out.println(cardAscii);
+    }
+
     private Player setUpPlayer() {
 //        gameConsole.promptPlayerName();   --> try refactor using this
         System.out.println("Please enter your name");
         String player1Name = scanner.nextLine();
         System.out.println("Player 1: " + player1Name);
         return new Player(player1Name);
+    }
+
+    public void declareWinner(LinkedList<Card> playerDeck, LinkedList<Card> computerDeck) {
+        // this isnt working
+        if (playerDeck.isEmpty() || player.getScore() >= 100) {
+            System.out.println("Computer has won");
+        } else if (computerDeck.isEmpty() || computer.getScore() >= 100) {
+            System.out.println(player.getName() + " has won!!");
+        }
     }
 
     public void startGame() {
@@ -53,34 +72,26 @@ public class War extends Game {
         startGame();
         deckOfCards.shuffleDeck();
 
-        UserCommands userCommands = new UserCommands(deckOfCards, player, computer, scanner);
-        userCommands.printOptions();
+        LinkedList<Card> playerDeck = new LinkedList<>();
+        LinkedList<Card> computerDeck = new LinkedList<>();
+        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
+        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
+        UserCommands userCommands = new UserCommands(deckOfCards, player, computer, playerDeck, computerDeck, scanner);
 
 
-        LinkedList<Card>deck1 = new LinkedList<>();
-        LinkedList<Card>deck2 = new LinkedList<>();
-        deck1.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
-        deck2.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
-
-
-        // linking player and comp card to
-        Card playersCard = deck1.pop();
-        Card computersCard = deck2.pop();
-        System.out.println( player.getName() + "'s card: " + playersCard.toString());
-        System.out.println("Computer's card: " + computersCard.toString());
-
-        if(playersCard.getValue() > computersCard.getValue()) {
-           this.player.increaseScore();  // whoever wins takes both set of cards
-        } else {
-            this.computer.increaseScore();
+        while (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
+            userCommands.printOptions(); // Display user options after each round
         }
-        gameConsole.displayGameState(this.player, computer);
-//        System.out.println(deck1.stream().distinct().count());
-    }
 
+    // Game ends when one of the decks is empty
+        // fix this logic
+       declareWinner(playerDeck, computerDeck);
+
+    }
 
     @Override
     public boolean playAgain() {
+        deckOfCards.resetDeck(); // error
             // add override logic here
         return false;
     }
