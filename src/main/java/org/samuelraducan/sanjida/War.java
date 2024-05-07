@@ -41,9 +41,9 @@ public class War extends Game {
 
     public void declareWinner(LinkedList<Card> playerDeck, LinkedList<Card> computerDeck) {
         // this isnt working
-        if (playerDeck.isEmpty() || player.getScore() >= 100) {
+        if (playerDeck.isEmpty() || computer.getScore() == 100) {
             System.out.println("Computer has won");
-        } else if (computerDeck.isEmpty() || computer.getScore() >= 100) {
+        } else if (computerDeck.isEmpty() || player.getScore() == 100) {
             System.out.println(player.getName() + " has won!!");
         }
     }
@@ -83,7 +83,7 @@ public class War extends Game {
             userCommands.printOptions(); // Display user options after each round
         }
 
-    // Game ends when one of the decks is empty
+    // Game ends when one of the decks is empty or player gets score 100
         // fix this logic
        declareWinner(playerDeck, computerDeck);
 
