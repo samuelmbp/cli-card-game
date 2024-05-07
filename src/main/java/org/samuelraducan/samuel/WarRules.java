@@ -4,7 +4,7 @@ public class WarRules {
     public static String getRules() {
         System.out.println();
         StringBuilder rules = new StringBuilder();
-        rules.append("War Card Game Rules:\n");
+        rules.append("Game Rules:\n");
         rules.append("1. Each player draws one card from the deck in each round.\n");
         rules.append("2. The player with the higher card value wins the round and earns a point.\n");
         rules.append("3. If both players draw cards with the same value, it's a tie, and no points are awarded.\n");

@@ -4,7 +4,7 @@ public class Card implements Comparable<Card> {
 
     private final String suit;
     private final String symbol;
-    private final int value;
+    private int value;
 
     public Card(String suit, String symbol, int value) {
         this.suit = suit;
@@ -23,6 +23,10 @@ public class Card implements Comparable<Card> {
 
     public int getValue() {
         return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     @Override

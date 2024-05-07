@@ -52,6 +52,10 @@ public class Player {
         this.score += POINTS;
     }
 
+    public void increaseScore(int points) {
+        this.score += points;
+    }
+
     public void clearCards() {
         playersCards.clear();
         this.score = 0;

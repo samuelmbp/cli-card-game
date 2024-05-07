@@ -34,12 +34,12 @@ public class GameConsole {
     public void displayGameState(Player player, Player computer, Card playerCard, Card computerCard) {
         System.out.println("Player: " + player.getName());
         System.out.println("Card: " + playerCard);
-        System.out.println("Score: " + player.getScore());
+//        System.out.println("Score: " + player.getScore());
 
         System.out.println("-----------------------------------");
 
         System.out.println("Computer");
         System.out.println("Card: " + computerCard);
-        System.out.println("Score: " + computer.getScore());
+//        System.out.println("Score: " + computer.getScore());
     }
 }

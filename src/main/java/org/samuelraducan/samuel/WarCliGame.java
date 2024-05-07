@@ -28,11 +28,12 @@ public class WarCliGame extends Game {
             System.out.println("Press Enter to reveal your card...");
             scanner.nextLine();
 
+
             Card playerCard = deck.dealCard();
             Card computerCard = deck.dealCard();
 
             processRound(playerCard, computerCard);
-            promptNextRound();
+//            promptNextRound();
 
             player.removeCard(playerCard);
             computer.removeCard(computerCard);
@@ -68,9 +69,9 @@ public class WarCliGame extends Game {
     private void initializeGame() {
         String playerName = promptPlayerName();
         player.setName(playerName);
+        console.welcomeMessage(playerName);
         printTitle();
         System.out.println(WarRules.getRules());
-        console.welcomeMessage(playerName);
     }
 
     private String promptPlayerName() {
@@ -79,9 +80,28 @@ public class WarCliGame extends Game {
     }
 
     private void processRound(Card playerCard, Card computerCard) {
+        // TODO: Extra 15 points when ACE is drawn
+        if(playerCard.getValue() == 14) {
+            player.increaseScore(15);
+            System.out.println("Nice one. You got an extra 15 points because of your ACE.");
+        }
+
+        if (computerCard.getValue() == 14) {
+            computer.increaseScore(15);
+            System.out.println("Nice one. You got an extra 15 points because of your ACE.");
+        }
+
         console.displayGameState(player, computer, playerCard, computerCard);
         System.out.println();
         determineWinner(playerCard, computerCard);
+        System.out.println();
+        displayScores();
+        promptNextRound();
+    }
+
+    private void displayScores() {
+        System.out.printf("%s's score: %d\n", player.getName(), player.getScore());
+        System.out.printf("Computer's score: %d\n", computer.getScore());
     }
 
     private void promptNextRound() {
@@ -103,6 +123,8 @@ public class WarCliGame extends Game {
             System.out.printf("Computer wins with a score of %d.", computer.getScore());
         } else {
             System.out.println();
+            // TODO: When two cards are the same, implement the logic for a WAR instead of print it's a tie.
+            // Think what the war will do?...
             System.out.println("It's a tie!");
         }
 
@@ -112,10 +134,10 @@ public class WarCliGame extends Game {
     private void determineWinner(Card playerCard, Card computerCard) {
         if (playerCard.getValue() > computerCard.getValue()) {
             System.out.printf("%s won this round!", player.getName());
-            player.increaseScore();
+            player.increaseScore(10);
         } else if (playerCard.getValue() < computerCard.getValue()) {
-            computer.increaseScore();
             System.out.println("Computer won this round!");
+            computer.increaseScore(10);
         } else {
             System.out.println("It's a tie!");
         }
