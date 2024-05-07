@@ -75,12 +75,11 @@ public class WarCliGame extends Game {
     }
 
     private String promptPlayerName() {
-        System.out.println("Please enter your name:");
+        System.out.println("Hello Warrior! Please enter your name to get started: ");
         return scanner.nextLine();
     }
 
     private void processRound(Card playerCard, Card computerCard) {
-        // TODO: Extra 15 points when ACE is drawn
         if(playerCard.getValue() == 14) {
             player.increaseScore(15);
             System.out.println("Nice one. You got an extra 15 points because of your ACE.");
@@ -91,7 +90,10 @@ public class WarCliGame extends Game {
             System.out.println("Nice one. You got an extra 15 points because of your ACE.");
         }
 
-        console.displayGameState(player, computer, playerCard, computerCard);
+        String playerCardAscii = playerCard.generateAsciiArt();
+        String computerCardAscii = computerCard.generateAsciiArt();
+
+        console.displayGameState(player, computer, playerCardAscii, computerCardAscii);
         System.out.println();
         determineWinner(playerCard, computerCard);
         System.out.println();

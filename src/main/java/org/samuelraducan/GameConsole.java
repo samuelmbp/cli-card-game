@@ -31,15 +31,13 @@ public class GameConsole {
         System.out.println("Computer's Score: " + computer.getScore());
     }
 
-    public void displayGameState(Player player, Player computer, Card playerCard, Card computerCard) {
-        System.out.println("Player: " + player.getName());
-        System.out.println("Card: " + playerCard);
-//        System.out.println("Score: " + player.getScore());
+    public void displayGameState(Player player, Player computer, String playerCardAscii, String computerCardAscii) {
+        System.out.println(player.getName());
+        System.out.println(playerCardAscii);
 
-        System.out.println("-----------------------------------");
+        System.out.println("------------------------------------");
 
-        System.out.println("Computer");
-        System.out.println("Card: " + computerCard);
-//        System.out.println("Score: " + computer.getScore());
+        System.out.println(computer.getName());
+        System.out.println(computerCardAscii);
     }
 }

@@ -1,5 +1,7 @@
 package org.samuelraducan;
 
+import org.samuelraducan.samuel.AsciiArt;
+
 public class Card implements Comparable<Card> {
 
     private final String suit;
@@ -12,6 +14,9 @@ public class Card implements Comparable<Card> {
         this.value = value;
     }
 
+    public String generateAsciiArt() {
+        return AsciiArt.generateCardArt(this);
+    }
 
     public String getSuit() {
         return suit;
