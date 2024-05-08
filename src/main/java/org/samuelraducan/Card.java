@@ -38,21 +38,22 @@ public class Card implements Comparable<Card> {
     public String toString() {
         String suitSymbol = "";
         switch (suit) {
-            case "u2764":
+            case "\u2764":
                 suitSymbol = "♥";
                 break;
-            case "u2600":
+            case "\u2600":
                 suitSymbol = "♦";
                 break;
-            case "u2666":
+            case "\u2666":
                 suitSymbol = "♣";
                 break;
-            case "u2663":
+            case "\u2663":
                 suitSymbol = "♠";
                 break;
         }
         return String.format("%-2s%s %-8s", symbol, suitSymbol, "(" + value + ")");
     }
+
 
     @Override
     public int compareTo(Card other) {
