@@ -70,8 +70,24 @@ public class WarCliGame extends Game {
     }
 
     private void initializeGame() {
-        String playerName = promptPlayerName();
-        player.setName(playerName);
+        String playerName;
+        System.out.println("********************************************");
+        System.out.println("*                                          *");
+        System.out.println("*        Welcome to the War Game!          *");
+        System.out.println("*                                          *");
+        System.out.println("********************************************");
+        System.out.println();
+        do {
+            System.out.println("Hello Warrior! Please enter your name to get started: ");
+            playerName = scanner.nextLine().trim();
+            if (playerName.isEmpty()) {
+                System.out.println("Name cannot be empty! Please enter a valid name.");
+            }
+        } while(playerName.isEmpty());
+
+        System.out.println();
+        System.out.println("Great! You're ready to begin, " + playerName + ".");
+        System.out.println();
         console.welcomeMessage(playerName);
         printTitle();
         System.out.println(WarRules.getRules());
@@ -140,6 +156,7 @@ public class WarCliGame extends Game {
          *  String playerCardAscii = playerCard.generateAsciiArt();
          *  String computerCardAscii = computerCard.generateAsciiArt();
          */
+
         // TODO: Shall I deal only 2 cards during the war?
         if (deck.getDeckOfCards().size() >= 7) {
             for (int i = 0; i < 3; i++) {

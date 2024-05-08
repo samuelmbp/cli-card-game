@@ -1,5 +1,6 @@
 package org.samuelraducan;
 
+import org.samuelraducan.samuel.AsciiArt;
 import org.samuelraducan.samuel.WarCliGame;
 import org.samuelraducan.samuel.WarRules;
 import org.samuelraducan.sanjida.GoodKingBadQueen;
@@ -26,10 +27,11 @@ public class GameLoader implements ChooseGame {
 
     @Override
     public Game chooseGame() {
+
        int option = scanner.nextInt();
        if (option == 1) {
            if (warCliGame == null) {
-               warCliGame = new WarCliGame("WarCard Game", WarRules.getRules());
+               warCliGame = new WarCliGame(AsciiArt.clashOfCardsAscii(), WarRules.getRules());
            }
            warCliGame.play();
        } else if (option == 2) {
