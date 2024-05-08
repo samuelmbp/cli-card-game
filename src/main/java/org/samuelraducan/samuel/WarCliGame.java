@@ -31,12 +31,10 @@ public class WarCliGame extends Game {
             System.out.println("Press Enter to reveal your card...");
             scanner.nextLine();
 
-
             Card playerCard = deck.dealCard();
             Card computerCard = deck.dealCard();
 
             processRound(playerCard, computerCard);
-//            promptNextRound();
 
             player.removeCard(playerCard);
             computer.removeCard(computerCard);
@@ -78,13 +76,14 @@ public class WarCliGame extends Game {
         System.out.println("********************************************");
         System.out.println();
         do {
-            System.out.println("Hello Warrior! Please enter your name to get started: ");
-            playerName = scanner.nextLine().trim();
+//            System.out.println("Hello Warrior! Please enter your name to get started: ");
+            playerName = promptPlayerName();
             if (playerName.isEmpty()) {
                 System.out.println("Name cannot be empty! Please enter a valid name.");
             }
         } while(playerName.isEmpty());
 
+        player.setName(playerName);
         System.out.println();
         System.out.println("Great! You're ready to begin, " + playerName + ".");
         System.out.println();
@@ -94,19 +93,19 @@ public class WarCliGame extends Game {
     }
 
     private String promptPlayerName() {
-        System.out.println("Hello Warrior! Please enter your name to get started: ");
-        return scanner.nextLine();
+        System.out.println("Please enter your name to get started: ");
+        return scanner.nextLine().trim();
     }
 
     private void processRound(Card playerCard, Card computerCard) {
         if(playerCard.getValue() == 14) {
             player.increaseScore(15);
-            System.out.println("Nice one. You got an extra 15 points because of your ACE.");
+            System.out.println("Nice one! " + player.getName() + " gets an extra 15 points because of their ACE.");
         }
 
         if (computerCard.getValue() == 14) {
             computer.increaseScore(15);
-            System.out.println("Nice one. You got an extra 15 points because of your ACE.");
+            System.out.println("Nice one! The computer gets an extra 15 points because of its ACE.");
         }
 
         String playerCardAscii = playerCard.generateAsciiArt();
@@ -135,10 +134,15 @@ public class WarCliGame extends Game {
 
     private void determineWinner(Card playerCard, Card computerCard) {
         if (playerCard.getValue() > computerCard.getValue()) {
+            System.out.println("=".repeat(30));
             System.out.printf("%s won this round!", player.getName());
+            System.out.println();
+            System.out.println("=".repeat(30));
             player.increaseScore(10);
         } else if (playerCard.getValue() < computerCard.getValue()) {
+            System.out.println("=".repeat(30));
             System.out.println("Computer won this round!");
+            System.out.println("=".repeat(30));
             computer.increaseScore(10);
         } else {
             initiateWar(playerCard, computerCard);
@@ -146,31 +150,35 @@ public class WarCliGame extends Game {
     }
 
     private void initiateWar(Card playerCard, Card computerCard) {
-        System.out.println("It's a tie! WAR begins...");
+        System.out.println("It's a tie! Clash of Cards begins...");
+        System.out.println();
         List<Card> playerWarCards = new ArrayList<>();
         List<Card> computerWarCards = new ArrayList<>();
 
-
-        /**
-         * TODO: Generate ascii for the 3 cards player and computer...
-         *  String playerCardAscii = playerCard.generateAsciiArt();
-         *  String computerCardAscii = computerCard.generateAsciiArt();
-         */
-
-        // TODO: Shall I deal only 2 cards during the war?
         if (deck.getDeckOfCards().size() >= 7) {
             for (int i = 0; i < 3; i++) {
                 playerWarCards.add(deck.dealCard());
                 computerWarCards.add(deck.dealCard());
             }
 
+
             Card playerFourthCard = deck.dealCard();
             Card computerFourthCard = deck.dealCard();
 
-            System.out.println("Player's WAR cards: " + playerWarCards);
-            System.out.println("Computer's WAR cards: " + computerWarCards);
-            System.out.println("Player's fourth card: " + playerFourthCard);
-            System.out.println("Computer's fourth card: " + computerFourthCard);
+            System.out.println(player.getName() + "'s WAR cards:");
+            displayCards(playerWarCards);
+
+            System.out.println("Computer's WAR cards:");
+            displayCards(computerWarCards);
+
+            System.out.println("-".repeat(40));
+            System.out.println(player.getName() + "'s fourth card:");
+            System.out.println(playerFourthCard.generateAsciiArt());
+            System.out.println();
+            System.out.println("Computer's fourth card:");
+            System.out.println(computerFourthCard.generateAsciiArt());
+            System.out.println("_".repeat(40));
+
 
             determineWarWinner(playerFourthCard, computerFourthCard);
         } else {
@@ -179,19 +187,24 @@ public class WarCliGame extends Game {
         }
     }
 
-    private void determineWarWinner(
-                                    Card playerFourthCard, Card computerFourthCard) {
+    private void displayCards(List<Card> cards) {
+        for (Card card : cards) {
+            System.out.println(card);
+        }
+        System.out.println();
+    }
+
+    private void determineWarWinner(Card playerFourthCard, Card computerFourthCard) {
         int playerFourthValue = playerFourthCard.getValue();
         int computerFourthValue = computerFourthCard.getValue();
 
         if (playerFourthValue > computerFourthValue) {
-            System.out.println("Player wins the WAR with the fourth card!");
-            player.increaseScore(30);  // Player wins 30 extra points
+            System.out.println(player.getName() + " dominates in the WAR with the fourth card and earns an additional 30 points!");
+            player.increaseScore(30);
         } else if (playerFourthValue < computerFourthValue) {
-            System.out.println("Computer wins the WAR with the fourth card!");
-            computer.increaseScore(30);  // Computer wins 30 extra points
+            System.out.println("Computer dominates in the WAR with the fourth card and earns an additional 30 points!");
+            computer.increaseScore(30);
         } else {
-            // Handle tie if the fourth cards have equal value
             System.out.println("Fourth card tie! No extra points awarded.");
         }
     }

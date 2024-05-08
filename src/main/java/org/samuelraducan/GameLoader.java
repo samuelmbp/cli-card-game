@@ -29,6 +29,7 @@ public class GameLoader implements ChooseGame {
     public Game chooseGame() {
 
        int option = scanner.nextInt();
+       // TODO: Add error handling when input is not a number (string, symbol, letters etc..)
        if (option == 1) {
            if (warCliGame == null) {
                warCliGame = new WarCliGame(AsciiArt.clashOfCardsAscii(), WarRules.getRules());
