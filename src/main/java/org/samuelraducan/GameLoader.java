@@ -1,7 +1,6 @@
 package org.samuelraducan;
 
-import org.samuelraducan.samuel.AsciiArt;
-import org.samuelraducan.samuel.WarCliGame;
+import org.samuelraducan.samuel.ClashOfCards;
 import org.samuelraducan.samuel.WarRules;
 import org.samuelraducan.sanjida.GoodKingBadQueen;
 import org.samuelraducan.sanjida.Rules;
@@ -10,7 +9,7 @@ import java.util.Scanner;
 
 public class GameLoader implements ChooseGame {
     private Scanner scanner;
-    private WarCliGame warCliGame;
+    private ClashOfCards clashOfCards;
     private GoodKingBadQueen goodKingBadQueen;
     private Rules rules = new Rules();
 
@@ -31,10 +30,10 @@ public class GameLoader implements ChooseGame {
        int option = scanner.nextInt();
        // TODO: Add error handling when input is not a number (string, symbol, letters etc..)
        if (option == 1) {
-           if (warCliGame == null) {
-               warCliGame = new WarCliGame(AsciiArt.clashOfCardsAscii(), WarRules.getRules());
+           if (clashOfCards == null) {
+               clashOfCards = new ClashOfCards("", WarRules.getRules());
            }
-           warCliGame.play();
+           clashOfCards.play();
        } else if (option == 2) {
            if (goodKingBadQueen == null) {
                goodKingBadQueen = new GoodKingBadQueen("War", rules.getRules());

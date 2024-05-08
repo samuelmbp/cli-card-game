@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class WarCliGame extends Game {
+public class ClashOfCards extends Game {
     private final Player player;
     private final Player computer;
     private final Deck deck;
     private final GameConsole console;
     Scanner scanner;
 
-    public WarCliGame(String title, String rules) {
+    public ClashOfCards(String title, String rules) {
         super(title, rules);
         this.player = new Player();
         this.computer = new Player();
@@ -69,14 +69,13 @@ public class WarCliGame extends Game {
 
     private void initializeGame() {
         String playerName;
-        System.out.println("********************************************");
-        System.out.println("*                                          *");
-        System.out.println("*        Welcome to the War Game!          *");
-        System.out.println("*                                          *");
-        System.out.println("********************************************");
+        System.out.println("************************************************************");
+        System.out.println("*                                                          *");
+        System.out.println("*        Welcome to the Clash of Cards Game!               *");
+        System.out.println("*                                                          *");
+        System.out.println("************************************************************");
         System.out.println();
         do {
-//            System.out.println("Hello Warrior! Please enter your name to get started: ");
             playerName = promptPlayerName();
             if (playerName.isEmpty()) {
                 System.out.println("Name cannot be empty! Please enter a valid name.");
@@ -86,14 +85,17 @@ public class WarCliGame extends Game {
         player.setName(playerName);
         System.out.println();
         System.out.println("Great! You're ready to begin, " + playerName + ".");
-        System.out.println();
-        console.welcomeMessage(playerName);
+//        console.welcomeMessage(playerName);
         printTitle();
         System.out.println(WarRules.getRules());
+        System.out.println("*************************************************************************");
+        System.out.println("*    May the hammer of Thor, Mjölnir ⚡\uD83D\uDD28, be with you! :)               *");
+        System.out.println("*************************************************************************");
+        System.out.println();
     }
 
     private String promptPlayerName() {
-        System.out.println("Please enter your name to get started: ");
+        System.out.println("Are you ready to play? Then please enter your name to get started: ");
         return scanner.nextLine().trim();
     }
 
