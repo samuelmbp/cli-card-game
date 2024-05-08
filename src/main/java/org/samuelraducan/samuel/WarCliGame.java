@@ -141,7 +141,7 @@ public class WarCliGame extends Game {
          *  String computerCardAscii = computerCard.generateAsciiArt();
          */
         // TODO: Shall I deal only 2 cards during the war?
-        if (deck.getDeckOfCards().size() >= 5) {
+        if (deck.getDeckOfCards().size() >= 7) {
             for (int i = 0; i < 3; i++) {
                 playerWarCards.add(deck.dealCard());
                 computerWarCards.add(deck.dealCard());
