@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private final String name;
+
+    private String name;
     private final List<Card> playersCards;
     private int score;
 
     public Player() {
-        // Default name for computer
         this("Computer");
     }
 
@@ -52,8 +52,18 @@ public class Player {
         this.score += POINTS;
     }
 
+    public void increaseScore(int points) {
+        this.score += points;
+    }
+
     public void clearCards() {
         playersCards.clear();
+        this.score = 0;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getScore() {
