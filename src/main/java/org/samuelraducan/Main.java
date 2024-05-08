@@ -1,7 +1,7 @@
 package org.samuelraducan;
 
 import org.samuelraducan.sanjida.Rules;
-import org.samuelraducan.sanjida.War;
+import org.samuelraducan.sanjida.GoodKingBadQueen;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class Main {
         Rules rules = new Rules();
         String gameRules = rules.getRules();
 
-        War warGame = new War("War", gameRules);
-        warGame.play();
+        GoodKingBadQueen goodKingBadQueenGame = new GoodKingBadQueen("War", gameRules);
+        goodKingBadQueenGame.play();
     }
 }

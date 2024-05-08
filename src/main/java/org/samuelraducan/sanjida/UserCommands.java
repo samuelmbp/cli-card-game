@@ -14,7 +14,7 @@ public class UserCommands {
     private Player player;
     private Player computer;
     private Scanner scanner;
-    private War war;
+    private GoodKingBadQueen goodKingBadQueen;
     private LinkedList<Card> playerDeck;
     private LinkedList<Card> computerDeck;
 
@@ -81,38 +81,74 @@ public class UserCommands {
         return true;
     }
 
+   // refactor this
     private void dealNextSetOfCards() {
         if (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
             Card playersCard = playerDeck.pop();
             Card computersCard = computerDeck.pop();
 
-//            System.out.println(player.getName() + "'s card: " + playersCard.toString());
-//            System.out.println("Computer's card: " + computersCard.toString());
 
             System.out.println(player.getName() + "'s card:");
             displayCardAscii(playersCard);
             System.out.println("Computer's card:");
             displayCardAscii(computersCard);
 
+            //  create two methods for the forloop and it will have param taker and giver adn can just assign depending on who it is
 
-            if (playersCard.getValue() > computersCard.getValue()) {
+            if ((computersCard.getSymbol().equals("K") && playersCard.getSymbol().equals("K")) ||
+                    (playersCard.getSymbol().equals("Q") && computersCard.getSymbol().equals("Q"))) {
+                System.out.println("Tie");
+            } else if (playersCard.getSymbol().equals("K")) {
+                for (int i = 0; i < 4; i++) {
+                    playerDeck.addLast(computerDeck.removeFirst());
+                }
                 playerDeck.addLast(playersCard);
                 playerDeck.addLast(computersCard);
                 this.player.increaseScore();
-                System.out.println(player.getName() + " wins this round!");
-            } else if (playersCard.getValue() < computersCard.getValue()) {
+                System.out.println(player.getName() + " captured a King! They take 5 cards from the computer.");
+            } else if (computersCard.getSymbol().equals("K")) {
+                for (int i = 0; i < 4; i++) {
+                    computerDeck.addLast(playerDeck.removeFirst());
+                }
                 computerDeck.addLast(playersCard);
                 computerDeck.addLast(computersCard);
                 this.computer.increaseScore();
-                System.out.println("Computer wins this round!");
+                System.out.println("Computer captured a King! They take 5 cards from the player.");
+            } else if (playersCard.getSymbol().equals("Q")) {
+                for (int i = 0; i < 4; i++) {
+                    computerDeck.add(playerDeck.removeFirst());
+                }
+                computerDeck.addLast(playersCard);
+                computerDeck.addLast(computersCard);
+                System.out.println("Oh no! " + player.getName() + " captured a Queen. They must give 5 cards to the player");
+            } else if (computersCard.getSymbol().equals("Q")) {
+                for (int i = 0; i < 4; i++) {
+                    playerDeck.addLast(computerDeck.removeFirst());
+                }
+                playerDeck.addLast(playersCard);
+                playerDeck.addLast(computersCard);
+                System.out.println("Oh no! The Computer captured a Queen. They must give 5 cards to the player");
             } else {
-                // WAR logic goes here
-                System.out.println("WAR");
+                if (playersCard.getValue() > computersCard.getValue()) {
+                    playerDeck.addLast(playersCard);
+                    playerDeck.addLast(computersCard);
+                    this.player.increaseScore();
+                    System.out.println(player.getName() + " wins this round!");
+                } else if (playersCard.getValue() < computersCard.getValue()) {
+                    computerDeck.addLast(playersCard);
+                    computerDeck.addLast(computersCard);
+                    this.computer.increaseScore();
+                    System.out.println("Computer wins this round!");
+                } else {
+                    // WAR logic goes here
+                    System.out.println("Tie");
+                }
             }
             gameConsole.displayGameState(player, computer);
         } else {
             System.out.println("The game is already over. Please select another option.");
         }
+
     }
 
     private void displayCardAscii(Card card) {

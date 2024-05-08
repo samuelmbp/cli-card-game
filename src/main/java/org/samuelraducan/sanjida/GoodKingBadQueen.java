@@ -5,14 +5,14 @@ import org.samuelraducan.*;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class War extends Game {
+public class GoodKingBadQueen extends Game {
     private GameConsole gameConsole;
     private Deck deckOfCards;
     private Player player;
     private Player computer;
     private Scanner scanner;
 
-    public War(String title, String rules) {
+    public GoodKingBadQueen(String title, String rules) {
         super(title, rules);
         this.scanner = new Scanner(System.in);
         this.gameConsole = new GameConsole();  // initialises the game console
@@ -42,9 +42,9 @@ public class War extends Game {
     public void declareWinner(LinkedList<Card> playerDeck, LinkedList<Card> computerDeck) {
         // this isnt working
         if (playerDeck.isEmpty() || computer.getScore() == 100) {
-            System.out.println("Computer has won");
+            System.out.println("COMPUTER HAS WON");
         } else if (computerDeck.isEmpty() || player.getScore() == 100) {
-            System.out.println(player.getName() + " has won!!");
+            System.out.println(player.getName() + " HAS WON!!");
         }
     }
 
@@ -79,8 +79,10 @@ public class War extends Game {
         UserCommands userCommands = new UserCommands(deckOfCards, player, computer, playerDeck, computerDeck, scanner);
 
 
-        while (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
+        // not working for the declarewinner
+        while (!playerDeck.isEmpty() && !computerDeck.isEmpty() && player.getScore() < 100 && computer.getScore() < 100) {
             userCommands.printOptions(); // Display user options after each round
+
         }
 
     // Game ends when one of the decks is empty or player gets score 100
