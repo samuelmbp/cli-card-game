@@ -1,6 +1,9 @@
 package org.samuelraducan.samuel;
 
 import org.samuelraducan.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class WarCliGame extends Game {
@@ -114,6 +117,68 @@ public class WarCliGame extends Game {
         }
     }
 
+    private void determineWinner(Card playerCard, Card computerCard) {
+        if (playerCard.getValue() > computerCard.getValue()) {
+            System.out.printf("%s won this round!", player.getName());
+            player.increaseScore(10);
+        } else if (playerCard.getValue() < computerCard.getValue()) {
+            System.out.println("Computer won this round!");
+            computer.increaseScore(10);
+        } else {
+            initiateWar(playerCard, computerCard);
+        }
+    }
+
+    private void initiateWar(Card playerCard, Card computerCard) {
+        System.out.println("It's a tie! WAR begins...");
+        List<Card> playerWarCards = new ArrayList<>();
+        List<Card> computerWarCards = new ArrayList<>();
+
+
+        /**
+         * TODO: Generate ascii for the 3 cards player and computer...
+         *  String playerCardAscii = playerCard.generateAsciiArt();
+         *  String computerCardAscii = computerCard.generateAsciiArt();
+         */
+        // TODO: Shall I deal only 2 cards during the war?
+        if (deck.getDeckOfCards().size() >= 5) {
+            for (int i = 0; i < 3; i++) {
+                playerWarCards.add(deck.dealCard());
+                computerWarCards.add(deck.dealCard());
+            }
+
+            Card playerFourthCard = deck.dealCard();
+            Card computerFourthCard = deck.dealCard();
+
+            System.out.println("Player's WAR cards: " + playerWarCards);
+            System.out.println("Computer's WAR cards: " + computerWarCards);
+            System.out.println("Player's fourth card: " + playerFourthCard);
+            System.out.println("Computer's fourth card: " + computerFourthCard);
+
+            determineWarWinner(playerFourthCard, computerFourthCard);
+        } else {
+            System.out.println("Not enough cards to continue the war. Game ends in a tie.");
+            endGame();
+        }
+    }
+
+    private void determineWarWinner(
+                                    Card playerFourthCard, Card computerFourthCard) {
+        int playerFourthValue = playerFourthCard.getValue();
+        int computerFourthValue = computerFourthCard.getValue();
+
+        if (playerFourthValue > computerFourthValue) {
+            System.out.println("Player wins the WAR with the fourth card!");
+            player.increaseScore(30);  // Player wins 30 extra points
+        } else if (playerFourthValue < computerFourthValue) {
+            System.out.println("Computer wins the WAR with the fourth card!");
+            computer.increaseScore(30);  // Computer wins 30 extra points
+        } else {
+            // Handle tie if the fourth cards have equal value
+            System.out.println("Fourth card tie! No extra points awarded.");
+        }
+    }
+
     private void endGame() {
         console.displayGameState(player, computer);
 
@@ -125,24 +190,10 @@ public class WarCliGame extends Game {
             System.out.printf("Computer wins with a score of %d.", computer.getScore());
         } else {
             System.out.println();
-            // TODO: When two cards are the same, implement the logic for a WAR instead of print it's a tie.
-            // Think what the war will do?...
             System.out.println("It's a tie!");
         }
 
         playAgain();
-    }
-
-    private void determineWinner(Card playerCard, Card computerCard) {
-        if (playerCard.getValue() > computerCard.getValue()) {
-            System.out.printf("%s won this round!", player.getName());
-            player.increaseScore(10);
-        } else if (playerCard.getValue() < computerCard.getValue()) {
-            System.out.println("Computer won this round!");
-            computer.increaseScore(10);
-        } else {
-            System.out.println("It's a tie!");
-        }
     }
 
     private void resetGame() {
