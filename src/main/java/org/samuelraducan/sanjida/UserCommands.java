@@ -75,7 +75,6 @@ public class UserCommands {
                 break;
             case 3:
                 gameConsole.displayGameState(player, computer);
-//                goodKingBadQueen.playAgain();
                 break;
             case 4:
                 System.out.println(player.getName() + "'s number of cards: " + playerDeck.size());

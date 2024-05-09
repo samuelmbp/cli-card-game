@@ -21,16 +21,6 @@ public class GoodKingBadQueen extends Game {
         this.player = setUpPlayer();
     }
 
-    public void displayPlayerCardAscii(Card card) {
-        String cardAscii = CardAscii.generateCardAscii(card);
-        System.out.println(cardAscii);
-    }
-
-    public void displayComputerCardAscii(Card card) {
-        String cardAscii = CardAscii.generateCardAscii(card);
-        System.out.println(cardAscii);
-    }
-
     private Player setUpPlayer() {
         System.out.println("Please enter your name");
         String player1Name = scanner.nextLine();
@@ -56,10 +46,10 @@ public class GoodKingBadQueen extends Game {
     }
 
     public void declareWinner(LinkedList<Card> playerDeck,  LinkedList<Card> computerDeck) {
-        if (playerDeck.isEmpty() || computer.getScore() == 20) {
-            System.out.println("Computer wins!");
-        } else if (computerDeck.isEmpty() || player.getScore() == 20) {
-            System.out.println("Player wins!");
+        if (playerDeck.isEmpty()) {
+            System.out.println("Players cards are empty, so Computer wins!");
+        } else if (computerDeck.isEmpty()) {
+            System.out.println("Computer cards are empty, so " + player.getName() + "WINS!");
         }
 
         if (playAgain()) {
@@ -74,26 +64,24 @@ public class GoodKingBadQueen extends Game {
         LinkedList<Card> playerDeck = new LinkedList<>();
         LinkedList<Card> computerDeck = new LinkedList<>();
         UserCommands userCommands = new UserCommands(deckOfCards, player, computer, playerDeck, computerDeck, scanner);
+        CardAscii displayTitle = new CardAscii();
 
-        gameConsole.welcomeMessage("War");
+        gameConsole.welcomeMessage("Good King, Bad Queen");
+        displayTitle.goodKingBadQueenDisplay();
         startGame();
         deckOfCards.shuffleDeck();
-        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0,1));
-//        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
-        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(1,2));
-//        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
+        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
+        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
 
 
         while (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
             userCommands.printOptions();
         }
 
-        // fix this logic - not working
        declareWinner(playerDeck, computerDeck);
     }
 
 
-    // double check play again method
     @Override
     public boolean playAgain() {
         String usersInput;
@@ -127,3 +115,4 @@ public class GoodKingBadQueen extends Game {
 // fix playAgain method
 // refactor queen and king method
 // fix card ascii
+// add score methos to end game

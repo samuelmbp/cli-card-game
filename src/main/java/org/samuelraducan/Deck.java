@@ -45,25 +45,12 @@ public class Deck {
         }
     }
 
-//    private void populateDeckCards() {
-//        String[] suits = {"❤", "♠", "♦", "♣" };
-//        String[] symbols = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-//        int[] values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
-//
-//        for (String suit: suits) {
-//            for (int i = 0; i < symbols.length; i++) {
-//                Card card = new Card(suit, symbols[i], values[i]);
-//                deckOfCards.add(card);
-//            }
-//        }
-//    }
-
     private void populateDeckCards() {
-        String[] suits = {"❤", "♠"};
-        String[] symbols = {"2", "A"};
-        int[] values = {2, 14};
+        String[] suits = {"❤", "♠", "♦", "♣" };
+        String[] symbols = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+        int[] values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
-        for (String suit : suits) {
+        for (String suit: suits) {
             for (int i = 0; i < symbols.length; i++) {
                 Card card = new Card(suit, symbols[i], values[i]);
                 deckOfCards.add(card);
