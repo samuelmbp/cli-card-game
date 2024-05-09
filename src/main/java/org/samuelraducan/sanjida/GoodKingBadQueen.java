@@ -55,6 +55,20 @@ public class GoodKingBadQueen extends Game {
         }
     }
 
+    public void declareWinner(LinkedList<Card> playerDeck,  LinkedList<Card> computerDeck) {
+        if (playerDeck.isEmpty() || computer.getScore() == 20) {
+            System.out.println("Computer wins!");
+        } else if (computerDeck.isEmpty() || player.getScore() == 20) {
+            System.out.println("Player wins!");
+        }
+
+        if (playAgain()) {
+            play();
+        } else {
+            System.out.println("Thanks for playing!");
+        }
+    }
+
 
     @Override
     public void play() {
@@ -66,32 +80,18 @@ public class GoodKingBadQueen extends Game {
         gameConsole.welcomeMessage("War");
         startGame();
         deckOfCards.shuffleDeck();
-        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
-        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
+        playerDeck.addAll(deckOfCards.getDeckOfCards());
+//        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
+        computerDeck.addAll(deckOfCards.getDeckOfCards());
+//        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
 
 
-
-        while (!playerDeck.isEmpty() && !computerDeck.isEmpty() ) {
+        while (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
             userCommands.printOptions();
-
         }
 
-        // determine the winner
         // fix this logic - not working
-        if (computerDeck.isEmpty() || computer.getScore() == 20) {
-            System.out.println("YOU WIN!!");
-        } else {
-            System.out.println("Computer Won");
-        }
-
-        if (playAgain()) {
-            play();
-        } else {
-            System.out.println("Thanks for playing!");
-        }
-//       declareWinner(playerDeck, computerDeck);
-//        scanner.close();
-
+       declareWinner(playerDeck, computerDeck);
     }
 
 
@@ -99,6 +99,7 @@ public class GoodKingBadQueen extends Game {
     @Override
     public boolean playAgain() {
         String usersInput;
+
         while (true) {
             System.out.println();
             System.out.print("Play again? (yes/no): ");
@@ -121,7 +122,7 @@ public class GoodKingBadQueen extends Game {
 
 
 // toDo
-// add READMe
 // fix declareWinner method
 // fix playAgain method
 // refactor queen and king method
+// fix card ascii
