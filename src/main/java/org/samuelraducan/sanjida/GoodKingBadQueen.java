@@ -64,8 +64,6 @@ public class GoodKingBadQueen extends Game {
 
         if (playAgain()) {
             play();
-        } else {
-            System.out.println("Thanks for playing!");
         }
     }
 
@@ -80,9 +78,9 @@ public class GoodKingBadQueen extends Game {
         gameConsole.welcomeMessage("War");
         startGame();
         deckOfCards.shuffleDeck();
-        playerDeck.addAll(deckOfCards.getDeckOfCards());
+        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0,1));
 //        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
-        computerDeck.addAll(deckOfCards.getDeckOfCards());
+        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(1,2));
 //        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
 
 
@@ -111,12 +109,15 @@ public class GoodKingBadQueen extends Game {
                     play();
                 } else if (usersInput.equalsIgnoreCase("no")) {
                     System.out.println("Thanks for playing!");
+                    break;
                 }
             } else {
-              return false;
+                return false;
             }
         }
+        return false;
     }
+
 
 }
 

@@ -47,7 +47,12 @@ public class UserCommands {
 
             int userSelection = scanner.nextInt();
             scanner.nextLine();
-            handleUserSelection(userSelection);
+
+            boolean quitGame = handleUserSelection(userSelection);
+
+            if (quitGame) {
+                break;
+            }
 
             System.out.println("Press Enter to continue...");
             scanner.nextLine();
@@ -55,7 +60,7 @@ public class UserCommands {
     }
 
 
-    public void handleUserSelection(int userSelection) {
+    public boolean handleUserSelection(int userSelection) {
         System.out.println("Performing the user's option: " + userSelection);
         System.out.println();
 
@@ -63,7 +68,7 @@ public class UserCommands {
         switch (userSelection) {
             case 1:
                 dealNextSetOfCards();
-                break;
+                return playerDeck.isEmpty() || computerDeck.isEmpty();
             case 2:
                 deck.shuffleDeck();
                 System.out.println("Cards have been shuffled");
@@ -79,10 +84,14 @@ public class UserCommands {
             case 5:
                 System.out.println("Quitting the game...");
                 System.out.println("Thanks for playing");
-                System.exit(0);
+                computerDeck.clear();
+                playerDeck.clear();
+                return true;
             default:
                 System.out.println("Invalid option. Please select a number between 1 and 5.");
         }
+
+        return false;
     }
 
     private void dealNextSetOfCards() {
