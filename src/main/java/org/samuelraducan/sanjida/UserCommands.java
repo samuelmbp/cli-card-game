@@ -104,7 +104,6 @@ public class UserCommands {
             System.out.println("Computer's card:");
             displayCardAscii(computersCard);
 
-
             if ((computersCard.getSymbol().equals("K") && playersCard.getSymbol().equals("K")) ||
                     (playersCard.getSymbol().equals("Q") && computersCard.getSymbol().equals("Q"))) {
                 System.out.println("Tie");
@@ -137,6 +136,7 @@ public class UserCommands {
 
         }
     }
+
 
     private void captureKing(Card playersCard, Card computersCard) {
         Player capturingPlayer;
@@ -172,7 +172,7 @@ public class UserCommands {
             }
             computerDeck.addLast(playersCard);
             computerDeck.addLast(computersCard);
-            System.out.println("Oh no! " + player.getName() + " captured a Queen. They must give 5 cards to the player");
+            System.out.println("Oh no! " + player.getName() + " captured a Queen. They must give 5 cards to the Computer");
         } else if (computersCard.getSymbol().equals("Q")) {
             for (int i = 0; i < 4; i++) {
                 playerDeck.addLast(computerDeck.removeFirst());

@@ -13,10 +13,3 @@ public class Rules {
         return rules;
     }
 }
-//If you capture a King, that is good: all players give you 5 cards.
-//If you capture a Queen, that is bad: you award 5 cards to all players.
-
-
-// if the player gets a K then they get 5 cards from the player
-// if the player gets a Q, then they GIVE 5 cards to the player
-// and if neither, then whoever has the highest value wins and keeps both cards

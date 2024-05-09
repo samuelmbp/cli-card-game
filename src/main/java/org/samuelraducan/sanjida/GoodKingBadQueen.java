@@ -15,7 +15,7 @@ public class GoodKingBadQueen extends Game {
     public GoodKingBadQueen(String title, String rules) {
         super(title, rules);
         this.scanner = new Scanner(System.in);
-        this.gameConsole = new GameConsole();  // initialises the game console
+        this.gameConsole = new GameConsole();
         this.deckOfCards = new Deck();
         this.computer = new Player();
         this.player = setUpPlayer();
@@ -71,7 +71,7 @@ public class GoodKingBadQueen extends Game {
         startGame();
         deckOfCards.shuffleDeck();
         playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
-        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
+        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26,52));
 
 
         while (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
