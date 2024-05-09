@@ -1,6 +1,6 @@
 package org.samuelraducan.samuel;
 
-public class WarRules {
+public class GameRules {
     public static String getRules() {
             StringBuilder rules = new StringBuilder();
             rules.append("Game Rules:\n");

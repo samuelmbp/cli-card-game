@@ -11,7 +11,7 @@ public class ClashOfCards extends Game {
 
     public ClashOfCards(String title, String rules) {
         super(title, rules);
-        this.gameLogic = new GameLogic(new GameConsole(), new InputOutputHandler());
+        this.gameLogic = new GameLogic(new GameConsole(), new InputOutputHandler(), new Deck());
         this.inputOutputHandler = new InputOutputHandler();
         this.scanner = new Scanner(System.in);
     }

@@ -1,7 +1,7 @@
 package org.samuelraducan;
 
 import org.samuelraducan.samuel.ClashOfCards;
-import org.samuelraducan.samuel.WarRules;
+import org.samuelraducan.samuel.GameRules;
 import org.samuelraducan.sanjida.GoodKingBadQueen;
 import org.samuelraducan.sanjida.Rules;
 
@@ -20,7 +20,7 @@ public class GameLoader implements ChooseGame {
     @Override
     public void printGames() {
         System.out.println("Choose a game to play: ");
-        System.out.println("1. WarCard (Samuel)");
+        System.out.println("1. Clash of Cards (Samuel)");
         System.out.println("2. Good King, Bad Queen (Sanjida)");
     }
 
@@ -31,7 +31,7 @@ public class GameLoader implements ChooseGame {
        // TODO: Add error handling when input is not a number (string, symbol, letters etc..)
        if (option == 1) {
            if (clashOfCards == null) {
-               clashOfCards = new ClashOfCards("", WarRules.getRules());
+               clashOfCards = new ClashOfCards("", GameRules.getRules());
            }
            clashOfCards.play();
        } else if (option == 2) {
