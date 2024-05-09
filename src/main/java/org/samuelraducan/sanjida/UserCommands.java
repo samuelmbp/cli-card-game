@@ -25,7 +25,6 @@ public class UserCommands {
             "Check number of cards",
             "Quit game"
     };
-        // ADD PLAY AGAIN OPTION
 
     public UserCommands(Deck deck, Player player, Player computer, LinkedList<Card> playerDeck, LinkedList<Card> computerDeck, Scanner scanner) {
         this.deck = deck;
@@ -37,8 +36,8 @@ public class UserCommands {
         this.gameConsole = new GameConsole();
     }
 
-    public void printOptions() {
 
+    public void printOptions() {
         while (true) {
             System.out.println();
             System.out.println("Select an option:");
@@ -47,13 +46,19 @@ public class UserCommands {
             }
 
             int userSelection = scanner.nextInt();
+            scanner.nextLine();
             handleUserSelection(userSelection);
+
+            System.out.println("Press Enter to continue...");
+            scanner.nextLine();
         }
     }
 
-    public boolean handleUserSelection(int userSelection) {
+
+    public void handleUserSelection(int userSelection) {
         System.out.println("Performing the user's option: " + userSelection);
         System.out.println();
+
 
         switch (userSelection) {
             case 1:
@@ -67,21 +72,18 @@ public class UserCommands {
                 gameConsole.displayGameState(player, computer);
                 break;
             case 4:
-//                war.playAgain(); // give play again method
                 System.out.println(player.getName() + "'s number of cards: " + playerDeck.size());
                 System.out.println("Computer's number of cards: " + computerDeck.size());
                 break;
             case 5:
-                System.out.println("Quitting the game..."); ///error
-                return false;
+                System.out.println("Quitting the game...");
+                System.out.println("Thanks for playing");
+                System.exit(0);
             default:
                 System.out.println("Invalid option. Please select a number between 1 and 5.");
         }
-
-        return true;
     }
 
-   // refactor this
     private void dealNextSetOfCards() {
         if (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
             Card playersCard = playerDeck.pop();
@@ -93,11 +95,13 @@ public class UserCommands {
             System.out.println("Computer's card:");
             displayCardAscii(computersCard);
 
-            //  create two methods for the forloop and it will have param taker and giver adn can just assign depending on who it is
+
 
             if ((computersCard.getSymbol().equals("K") && playersCard.getSymbol().equals("K")) ||
                     (playersCard.getSymbol().equals("Q") && computersCard.getSymbol().equals("Q"))) {
                 System.out.println("Tie");
+                playerDeck.addLast(playersCard);
+                computerDeck.addLast(computersCard);
             } else if (playersCard.getSymbol().equals("K")) {
                 for (int i = 0; i < 4; i++) {
                     playerDeck.addLast(computerDeck.removeFirst());
@@ -140,13 +144,19 @@ public class UserCommands {
                     this.computer.increaseScore();
                     System.out.println("Computer wins this round!");
                 } else {
-                    // WAR logic goes here
+                    playerDeck.addLast(playersCard);
+                    computerDeck.addLast(computersCard);
                     System.out.println("Tie");
                 }
             }
             gameConsole.displayGameState(player, computer);
         } else {
             System.out.println("The game is already over. Please select another option.");
+//            if (playerDeck.isEmpty()) {
+//                System.out.println("Player's card deck is empty. Computer wins!");
+//            } else {
+//                System.out.println("Computer's card deck is empty. Player wins!");
+//            }
         }
 
     }

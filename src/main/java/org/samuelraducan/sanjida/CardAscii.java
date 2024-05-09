@@ -10,7 +10,7 @@ public class CardAscii {
         cardAscii.append("┌─────────┐\n");
         cardAscii.append(String.format("│ %-2s      │\n", card.getSymbol()));
         cardAscii.append("│         │\n");
-        cardAscii.append(String.format("│    %-2s  │\n", card.getSuit()));
+        cardAscii.append(String.format("│   %-2s    │\n", card.getSuit()));
         cardAscii.append("│         │\n");
         cardAscii.append(String.format("│      %-2s │\n", card.getSymbol()));
         cardAscii.append("└─────────┘\n");
@@ -19,4 +19,3 @@ public class CardAscii {
     }
 }
 
-// FIX THE ASCII, SUIT SYMBOL

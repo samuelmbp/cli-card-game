@@ -32,21 +32,12 @@ public class GoodKingBadQueen extends Game {
     }
 
     private Player setUpPlayer() {
-//        gameConsole.promptPlayerName();   --> try refactor using this
         System.out.println("Please enter your name");
         String player1Name = scanner.nextLine();
         System.out.println("Player 1: " + player1Name);
         return new Player(player1Name);
     }
 
-    public void declareWinner(LinkedList<Card> playerDeck, LinkedList<Card> computerDeck) {
-        // this isnt working
-        if (playerDeck.isEmpty() || computer.getScore() == 100) {
-            System.out.println("COMPUTER HAS WON");
-        } else if (computerDeck.isEmpty() || player.getScore() == 100) {
-            System.out.println(player.getName() + " HAS WON!!");
-        }
-    }
 
     public void startGame() {
         while (true) {
@@ -64,37 +55,73 @@ public class GoodKingBadQueen extends Game {
         }
     }
 
-    // i want to create options for the user
 
     @Override
     public void play() {
-        gameConsole.welcomeMessage("War");
-        startGame();
-        deckOfCards.shuffleDeck();
 
         LinkedList<Card> playerDeck = new LinkedList<>();
         LinkedList<Card> computerDeck = new LinkedList<>();
-        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
-        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
         UserCommands userCommands = new UserCommands(deckOfCards, player, computer, playerDeck, computerDeck, scanner);
 
+        gameConsole.welcomeMessage("War");
+        startGame();
+        deckOfCards.shuffleDeck();
+        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
+        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
 
-        // not working for the declarewinner
-        while (!playerDeck.isEmpty() && !computerDeck.isEmpty() && player.getScore() < 100 && computer.getScore() < 100) {
-            userCommands.printOptions(); // Display user options after each round
+
+
+        while (!playerDeck.isEmpty() && !computerDeck.isEmpty() ) {
+            userCommands.printOptions();
 
         }
 
-    // Game ends when one of the decks is empty or player gets score 100
-        // fix this logic
-       declareWinner(playerDeck, computerDeck);
+        // determine the winner
+        // fix this logic - not working
+        if (computerDeck.isEmpty() || computer.getScore() == 20) {
+            System.out.println("YOU WIN!!");
+        } else {
+            System.out.println("Computer Won");
+        }
+
+        if (playAgain()) {
+            play();
+        } else {
+            System.out.println("Thanks for playing!");
+        }
+//       declareWinner(playerDeck, computerDeck);
+//        scanner.close();
 
     }
 
+
+    // double check play again method
     @Override
     public boolean playAgain() {
-        deckOfCards.resetDeck(); // error
-            // add override logic here
-        return false;
+        String usersInput;
+        while (true) {
+            System.out.println();
+            System.out.print("Play again? (yes/no): ");
+            usersInput = scanner.nextLine();
+            if (!usersInput.isEmpty()) {
+                if (usersInput.equalsIgnoreCase("yes")) {
+                    deckOfCards.resetDeck();
+                    deckOfCards.shuffleDeck();
+                    play();
+                } else if (usersInput.equalsIgnoreCase("no")) {
+                    System.out.println("Thanks for playing!");
+                }
+            } else {
+              return false;
+            }
+        }
     }
+
 }
+
+
+// toDo
+// add READMe
+// fix declareWinner method
+// fix playAgain method
+// refactor queen and king method
