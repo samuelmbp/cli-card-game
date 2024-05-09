@@ -41,7 +41,6 @@ public class GameLoader implements ChooseGame {
            goodKingBadQueen.play();
        }
 
-       System.out.println("Null runs ");
        return null;
     }
 }
