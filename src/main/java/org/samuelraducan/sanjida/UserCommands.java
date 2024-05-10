@@ -22,7 +22,6 @@ public class UserCommands {
             "Deal next set of cards",
             "Shuffle the deck of cards",
             "See game score",
-            "Check number of cards",
             "Quit game"
     };
 
@@ -54,6 +53,8 @@ public class UserCommands {
                 break;
             }
 
+
+            System.out.println();
             System.out.println("Press Enter to continue...");
             scanner.nextLine();
         }
@@ -77,17 +78,13 @@ public class UserCommands {
                 gameConsole.displayGameState(player, computer);
                 break;
             case 4:
-                System.out.println(player.getName() + "'s number of cards: " + playerDeck.size());
-                System.out.println("Computer's number of cards: " + computerDeck.size());
-                break;
-            case 5:
                 System.out.println("Quitting the game...");
                 System.out.println("Thanks for playing");
                 computerDeck.clear();
                 playerDeck.clear();
                 return true;
             default:
-                System.out.println("Invalid option. Please select a number between 1 and 5.");
+                System.out.println("Invalid option. Please select a number between 1 and 4.");
         }
 
         return false;
@@ -131,6 +128,10 @@ public class UserCommands {
                 }
             }
             gameConsole.displayGameState(player, computer);
+            System.out.println();
+            System.out.println(player.getName() + "'s number of cards: " + playerDeck.size());
+            System.out.println("Computer's number of cards: " + computerDeck.size());
+            System.out.println();
         } else {
             System.out.println("The game is already over. Please select another option.");
 
