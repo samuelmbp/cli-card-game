@@ -31,7 +31,7 @@ public class GameLoader implements ChooseGame {
        // TODO: Add error handling when input is not a number (string, symbol, letters etc..)
        if (option == 1) {
            if (clashOfCards == null) {
-               clashOfCards = new ClashOfCards("", GameRules.getRules());
+               clashOfCards = new ClashOfCards("Clash of Cards", GameRules.getRules());
            }
            clashOfCards.play();
        } else if (option == 2) {

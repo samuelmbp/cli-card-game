@@ -21,7 +21,6 @@ public class GameLogic {
         this.inputOutputHandler = inputOutputHandler;
         this.player = new Player();
         this.computer = new Player();
-//        this.deck = new Deck();
         this.deck = deck;
         this.deck.shuffleDeck();
         this.console = console;
