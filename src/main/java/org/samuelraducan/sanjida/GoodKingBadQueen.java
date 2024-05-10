@@ -105,14 +105,4 @@ public class GoodKingBadQueen extends Game {
         }
         return false;
     }
-
-
 }
-
-
-// toDo
-// fix declareWinner method
-// fix playAgain method
-// refactor queen and king method
-// fix card ascii
-// add score methos to end game
