@@ -31,6 +31,7 @@ public class InputOutputHandler {
     public void displayWelcomeMessage(String playerName) {
         System.out.println();
         System.out.println("Great! You're ready to begin, " + playerName + ".");
+        System.out.println(GameRules.getRules());
         System.out.println("*************************************************************************");
         System.out.println("*    May the hammer of Thor, Mjölnir ⚡\uD83D\uDD28, be with you! :)               *");
         System.out.println("*************************************************************************");
