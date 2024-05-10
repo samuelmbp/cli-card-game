@@ -49,3 +49,4 @@ The rules of the game are as follows:
 ### Contributors
 - Samuel Raducan
 - Sanjida Begum
+

@@ -15,38 +15,19 @@ public class GoodKingBadQueen extends Game {
     public GoodKingBadQueen(String title, String rules) {
         super(title, rules);
         this.scanner = new Scanner(System.in);
-        this.gameConsole = new GameConsole();  // initialises the game console
+        this.gameConsole = new GameConsole();
         this.deckOfCards = new Deck();
         this.computer = new Player();
         this.player = setUpPlayer();
     }
 
-    public void displayPlayerCardAscii(Card card) {
-        String cardAscii = CardAscii.generateCardAscii(card);
-        System.out.println(cardAscii);
-    }
-
-    public void displayComputerCardAscii(Card card) {
-        String cardAscii = CardAscii.generateCardAscii(card);
-        System.out.println(cardAscii);
-    }
-
     private Player setUpPlayer() {
-//        gameConsole.promptPlayerName();   --> try refactor using this
         System.out.println("Please enter your name");
         String player1Name = scanner.nextLine();
         System.out.println("Player 1: " + player1Name);
         return new Player(player1Name);
     }
 
-    public void declareWinner(LinkedList<Card> playerDeck, LinkedList<Card> computerDeck) {
-        // this isnt working
-        if (playerDeck.isEmpty() || computer.getScore() == 100) {
-            System.out.println("COMPUTER HAS WON");
-        } else if (computerDeck.isEmpty() || player.getScore() == 100) {
-            System.out.println(player.getName() + " HAS WON!!");
-        }
-    }
 
     public void startGame() {
         while (true) {
@@ -64,37 +45,74 @@ public class GoodKingBadQueen extends Game {
         }
     }
 
-    // i want to create options for the user
+    public void declareWinner(LinkedList<Card> playerDeck,  LinkedList<Card> computerDeck) {
+        if (playerDeck.isEmpty()) {
+            System.out.println("Players cards are empty, so Computer wins!");
+        } else if (computerDeck.isEmpty()) {
+            System.out.println("Computer cards are empty, so " + player.getName() + "WINS!");
+        }
+
+        if (playAgain()) {
+            play();
+        }
+    }
+
 
     @Override
     public void play() {
-        gameConsole.welcomeMessage("War");
-        startGame();
-        deckOfCards.shuffleDeck();
 
         LinkedList<Card> playerDeck = new LinkedList<>();
         LinkedList<Card> computerDeck = new LinkedList<>();
-        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
-        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26, deckOfCards.getDeckOfCards().size()));
         UserCommands userCommands = new UserCommands(deckOfCards, player, computer, playerDeck, computerDeck, scanner);
+        CardAscii displayTitle = new CardAscii();
+
+        gameConsole.welcomeMessage("Good King, Bad Queen");
+        displayTitle.goodKingBadQueenDisplay();
+        startGame();
+        deckOfCards.shuffleDeck();
+        playerDeck.addAll(deckOfCards.getDeckOfCards().subList(0, 26));
+        computerDeck.addAll(deckOfCards.getDeckOfCards().subList(26,52));
 
 
-        // not working for the declarewinner
-        while (!playerDeck.isEmpty() && !computerDeck.isEmpty() && player.getScore() < 100 && computer.getScore() < 100) {
-            userCommands.printOptions(); // Display user options after each round
-
+        while (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
+            userCommands.printOptions();
         }
 
-    // Game ends when one of the decks is empty or player gets score 100
-        // fix this logic
        declareWinner(playerDeck, computerDeck);
-
     }
+
 
     @Override
     public boolean playAgain() {
-        deckOfCards.resetDeck(); // error
-            // add override logic here
+        String usersInput;
+
+        while (true) {
+            System.out.println();
+            System.out.print("Play again? (yes/no): ");
+            usersInput = scanner.nextLine();
+            if (!usersInput.isEmpty()) {
+                if (usersInput.equalsIgnoreCase("yes")) {
+                    deckOfCards.resetDeck();
+                    deckOfCards.shuffleDeck();
+                    play();
+                } else if (usersInput.equalsIgnoreCase("no")) {
+                    System.out.println("Thanks for playing!");
+                    break;
+                }
+            } else {
+                return false;
+            }
+        }
         return false;
     }
+
+
 }
+
+
+// toDo
+// fix declareWinner method
+// fix playAgain method
+// refactor queen and king method
+// fix card ascii
+// add score methos to end game

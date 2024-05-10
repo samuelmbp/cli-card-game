@@ -20,8 +20,8 @@ public class GameLoader implements ChooseGame {
     @Override
     public void printGames() {
         System.out.println("Choose a game to play: ");
-        System.out.println("1. Clash of Cards (Samuel)");
-        System.out.println("2. Good King, Bad Queen (Sanjida)");
+        System.out.println("1. Clash of Cards");
+        System.out.println("2. Good King, Bad Queen");
     }
 
     @Override
@@ -36,11 +36,10 @@ public class GameLoader implements ChooseGame {
            clashOfCards.play();
        } else if (option == 2) {
            if (goodKingBadQueen == null) {
-               goodKingBadQueen = new GoodKingBadQueen("War", rules.getRules());
+               goodKingBadQueen = new GoodKingBadQueen("Good King, Bad Queen", rules.getRules());
            }
            goodKingBadQueen.play();
        }
-
-       return null;
+        return chooseGame();
     }
 }

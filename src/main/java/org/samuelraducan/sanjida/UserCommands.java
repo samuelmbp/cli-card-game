@@ -25,7 +25,6 @@ public class UserCommands {
             "Check number of cards",
             "Quit game"
     };
-        // ADD PLAY AGAIN OPTION
 
     public UserCommands(Deck deck, Player player, Player computer, LinkedList<Card> playerDeck, LinkedList<Card> computerDeck, Scanner scanner) {
         this.deck = deck;
@@ -37,8 +36,8 @@ public class UserCommands {
         this.gameConsole = new GameConsole();
     }
 
-    public void printOptions() {
 
+    public void printOptions() {
         while (true) {
             System.out.println();
             System.out.println("Select an option:");
@@ -47,18 +46,29 @@ public class UserCommands {
             }
 
             int userSelection = scanner.nextInt();
-            handleUserSelection(userSelection);
+            scanner.nextLine();
+
+            boolean quitGame = handleUserSelection(userSelection);
+
+            if (quitGame) {
+                break;
+            }
+
+            System.out.println("Press Enter to continue...");
+            scanner.nextLine();
         }
     }
+
 
     public boolean handleUserSelection(int userSelection) {
         System.out.println("Performing the user's option: " + userSelection);
         System.out.println();
 
+
         switch (userSelection) {
             case 1:
                 dealNextSetOfCards();
-                break;
+                return playerDeck.isEmpty() || computerDeck.isEmpty();
             case 2:
                 deck.shuffleDeck();
                 System.out.println("Cards have been shuffled");
@@ -67,21 +77,22 @@ public class UserCommands {
                 gameConsole.displayGameState(player, computer);
                 break;
             case 4:
-//                war.playAgain(); // give play again method
                 System.out.println(player.getName() + "'s number of cards: " + playerDeck.size());
                 System.out.println("Computer's number of cards: " + computerDeck.size());
                 break;
             case 5:
-                System.out.println("Quitting the game..."); ///error
-                return false;
+                System.out.println("Quitting the game...");
+                System.out.println("Thanks for playing");
+                computerDeck.clear();
+                playerDeck.clear();
+                return true;
             default:
                 System.out.println("Invalid option. Please select a number between 1 and 5.");
         }
 
-        return true;
+        return false;
     }
 
-   // refactor this
     private void dealNextSetOfCards() {
         if (!playerDeck.isEmpty() && !computerDeck.isEmpty()) {
             Card playersCard = playerDeck.pop();
@@ -93,41 +104,15 @@ public class UserCommands {
             System.out.println("Computer's card:");
             displayCardAscii(computersCard);
 
-            //  create two methods for the forloop and it will have param taker and giver adn can just assign depending on who it is
-
             if ((computersCard.getSymbol().equals("K") && playersCard.getSymbol().equals("K")) ||
                     (playersCard.getSymbol().equals("Q") && computersCard.getSymbol().equals("Q"))) {
                 System.out.println("Tie");
-            } else if (playersCard.getSymbol().equals("K")) {
-                for (int i = 0; i < 4; i++) {
-                    playerDeck.addLast(computerDeck.removeFirst());
-                }
                 playerDeck.addLast(playersCard);
-                playerDeck.addLast(computersCard);
-                this.player.increaseScore();
-                System.out.println(player.getName() + " captured a King! They take 5 cards from the computer.");
-            } else if (computersCard.getSymbol().equals("K")) {
-                for (int i = 0; i < 4; i++) {
-                    computerDeck.addLast(playerDeck.removeFirst());
-                }
-                computerDeck.addLast(playersCard);
                 computerDeck.addLast(computersCard);
-                this.computer.increaseScore();
-                System.out.println("Computer captured a King! They take 5 cards from the player.");
-            } else if (playersCard.getSymbol().equals("Q")) {
-                for (int i = 0; i < 4; i++) {
-                    computerDeck.add(playerDeck.removeFirst());
-                }
-                computerDeck.addLast(playersCard);
-                computerDeck.addLast(computersCard);
-                System.out.println("Oh no! " + player.getName() + " captured a Queen. They must give 5 cards to the player");
-            } else if (computersCard.getSymbol().equals("Q")) {
-                for (int i = 0; i < 4; i++) {
-                    playerDeck.addLast(computerDeck.removeFirst());
-                }
-                playerDeck.addLast(playersCard);
-                playerDeck.addLast(computersCard);
-                System.out.println("Oh no! The Computer captured a Queen. They must give 5 cards to the player");
+            } else if (playersCard.getSymbol().equals("K") || computersCard.getSymbol().equals("K")) {
+                captureKing(playersCard, computersCard);
+            } else if (playersCard.getSymbol().equals("Q") || computersCard.getSymbol().equals("Q")) {
+                captureQueen(playersCard, computersCard);
             } else {
                 if (playersCard.getValue() > computersCard.getValue()) {
                     playerDeck.addLast(playersCard);
@@ -140,15 +125,62 @@ public class UserCommands {
                     this.computer.increaseScore();
                     System.out.println("Computer wins this round!");
                 } else {
-                    // WAR logic goes here
+                    playerDeck.addLast(playersCard);
+                    computerDeck.addLast(computersCard);
                     System.out.println("Tie");
                 }
             }
             gameConsole.displayGameState(player, computer);
         } else {
             System.out.println("The game is already over. Please select another option.");
+
+        }
+    }
+
+
+    private void captureKing(Card playersCard, Card computersCard) {
+        Player capturingPlayer;
+        LinkedList<Card> capturingDeck;
+        LinkedList<Card> capturingFromDeck;
+        String message;
+
+        if (playersCard.getSymbol().equals("K")) {
+            capturingPlayer = this.player;
+            capturingDeck = playerDeck;
+            capturingFromDeck = computerDeck;
+            message = player.getName() + " captured a King! They take 5 cards from the computer.";
+        } else {
+            capturingPlayer = this.computer;
+            capturingDeck = computerDeck;
+            capturingFromDeck = playerDeck;
+            message = "Computer captured a King! They take 5 cards from the player.";
         }
 
+        for (int i = 0; i < 4; i++) {
+            capturingDeck.addLast(capturingFromDeck.removeFirst());
+        }
+        capturingDeck.addLast(playersCard);
+        capturingDeck.addLast(computersCard);
+        capturingPlayer.increaseScore();
+        System.out.println(message);
+    }
+
+    private void captureQueen(Card playersCard, Card computersCard) {
+        if (playersCard.getSymbol().equals("Q")) {
+            for (int i = 0; i < 4; i++) {
+                computerDeck.add(playerDeck.removeFirst());
+            }
+            computerDeck.addLast(playersCard);
+            computerDeck.addLast(computersCard);
+            System.out.println("Oh no! " + player.getName() + " captured a Queen. They must give 5 cards to the Computer");
+        } else if (computersCard.getSymbol().equals("Q")) {
+            for (int i = 0; i < 4; i++) {
+                playerDeck.addLast(computerDeck.removeFirst());
+            }
+            playerDeck.addLast(playersCard);
+            playerDeck.addLast(computersCard);
+            System.out.println("Oh no! The Computer captured a Queen. They must give 5 cards to the player");
+        }
     }
 
     private void displayCardAscii(Card card) {
