@@ -25,7 +25,6 @@ public class GameConsole {
         System.out.println(player.getName() + "'s Score: " + player.getScore());
 
         System.out.println("-----------------------------------");
-
         System.out.println("Computer's Score: " + computer.getScore());
     }
 
