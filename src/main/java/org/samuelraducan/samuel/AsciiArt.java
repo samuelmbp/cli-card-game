@@ -21,4 +21,22 @@ public class AsciiArt {
 
         return asciiCard.toString();
     }
+
+    public static String clashOfCardsAscii() {
+        StringBuilder ascii = new StringBuilder();
+        ascii.append("-------------------------------------------------------\n");
+        ascii.append("|       |       |       |       |       |       |       |\n");
+        ascii.append("|   _   |   _   |   _   |   _   |   _   |   _   |   _   |\n");
+        ascii.append("|  / \\  |  / \\  |  / \\  |  / \\  |  / \\  |  / \\  |  / \\  |\n");
+        ascii.append("| ( C ) | ( L ) | ( A ) | ( S ) | ( H ) | ( O ) | ( F ) |\n");
+        ascii.append("|  \\_/  |  \\_/  |  \\_/  |  \\_/  |  \\_/  |  \\_/  |  \\_/  |\n");
+        ascii.append("|       |       |       |       |       |       |       |\n");
+        ascii.append("|   _   |   _   |   _   |   _   |   _   |   _   |   _   |\n");
+        ascii.append("|  / \\  |  / \\  |  / \\  |  / \\  |  / \\  |  / \\  |  / \\  |\n");
+        ascii.append("| ( C ) | ( A ) | ( R ) | ( D ) | ( S ) |       |       |\n");
+        ascii.append("|  \\_/  |  \\_/  |  \\_/  |  \\_/  |  \\_/  |       |       |\n");
+        ascii.append("-------------------------------------------------------");
+
+        return ascii.toString();
+    }
 }
