@@ -30,9 +30,6 @@ public class Card implements Comparable<Card> {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
 
     @Override
     public String toString() {

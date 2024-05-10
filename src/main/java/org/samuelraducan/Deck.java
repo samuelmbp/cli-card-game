@@ -22,14 +22,6 @@ public class Deck {
         return deckOfCards.remove(0);
     }
 
-    public void sortDeck() {
-        Collections.sort(deckOfCards);
-    }
-
-    public void sortDeck(Comparator<Card> comparator) {
-        Collections.sort(deckOfCards, comparator);
-    }
-
     public void shuffleDeck() {
         Collections.shuffle(deckOfCards);
     }
@@ -37,12 +29,6 @@ public class Deck {
     public void resetDeck() {
         deckOfCards.clear();
         populateDeckCards();
-    }
-
-    public void printDeck() {
-        for (Card card: deckOfCards) {
-            System.out.println(card);
-        }
     }
 
     private void populateDeckCards() {
